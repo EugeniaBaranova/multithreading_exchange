@@ -1,10 +1,10 @@
-package com.epam.multithreading.entity;
+package com.epam.multithreading.entity.currency;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Euro extends Currency{
+public class Euro extends Currency {
 
     private static Euro instance;
     private static AtomicBoolean initialized = new AtomicBoolean(false);

@@ -1,35 +1,40 @@
 package com.epam.multithreading.entity;
 
+import com.epam.multithreading.entity.currency.CurrencyName;
+
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Callable;
 
-public class ExchangeParticipant {
+public class ExchangeParticipant implements Callable<Object>{
 
-    private BigDecimal eurosAmount;
-    private BigDecimal dollarsAmount;
-    private BigDecimal rublesAmount;
+    private Exchange exchange;
 
-    public BigDecimal getEurosAmount() {
-        return eurosAmount;
+    private Map<CurrencyName, BigDecimal> currencyAmount = new HashMap<>();
+
+    public ExchangeParticipant(Exchange exchange) {
+        this.exchange = exchange;
+
+        currencyAmount.put(CurrencyName.EURO, BigDecimal.ZERO);
+        currencyAmount.put(CurrencyName.U_S_DOLLAR, BigDecimal.ZERO);
+        currencyAmount.put(CurrencyName.RUBLE, BigDecimal.ZERO);
     }
 
-    public void setEurosAmount(BigDecimal eurosAmount) {
-        this.eurosAmount = eurosAmount;
+    public Exchange getExchange() {
+        return exchange;
     }
 
-    public BigDecimal getDollarsAmount() {
-        return dollarsAmount;
+    public void setCurrencyAmount(Map<CurrencyName, BigDecimal> currencyAmount) {
+        this.currencyAmount = currencyAmount;
     }
 
-    public void setDollarsAmount(BigDecimal dollarsAmount) {
-        this.dollarsAmount = dollarsAmount;
+    public Map<CurrencyName, BigDecimal> getCurrencyAmount() {
+        return currencyAmount;
     }
 
-    public BigDecimal getRublesAmount() {
-        return rublesAmount;
+    @Override
+    public Object call() throws Exception {
+        return null;
     }
-
-    public void setRublesAmount(BigDecimal rublesAmount) {
-        this.rublesAmount = rublesAmount;
-    }
-
 }
