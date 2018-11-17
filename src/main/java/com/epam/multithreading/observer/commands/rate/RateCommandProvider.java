@@ -1,6 +1,7 @@
-package com.epam.multithreading.observer.commands;
+package com.epam.multithreading.observer.commands.rate;
 
 import com.epam.multithreading.entity.currency.CurrencyName;
+import com.epam.multithreading.observer.commands.Command;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -4,8 +4,10 @@ import com.epam.multithreading.entity.Exchange;
 import com.epam.multithreading.entity.ExchangeParticipant;
 import com.epam.multithreading.entity.currency.CurrencyName;
 import com.epam.multithreading.observer.commands.Command;
-import com.epam.multithreading.observer.commands.CommandProvider;
-import com.epam.multithreading.observer.commands.RateCommandProvider;
+import com.epam.multithreading.observer.commands.currentInfo.CommandProvider;
+import com.epam.multithreading.observer.commands.rate.RateCommandProvider;
+import com.epam.multithreading.operations.exception.OperationException;
+import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,8 +18,9 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ExchangeOperationProvider {
 
+    private static final Logger logger = Logger.getLogger(ExchangeOperationProvider.class);
+
     private Lock lock = new ReentrantLock();
-    //TODO Do I need condition?
     private Condition condition = lock.newCondition();
     private RateCommandProvider rateCommandProvider = new RateCommandProvider();
     private CommandProvider commandProvider;
@@ -32,7 +35,7 @@ public class ExchangeOperationProvider {
         this.exchangeParticipant = participant;
     }
 
-    public boolean buyCurrency(CurrencyName currencyName, BigDecimal requiredAmount) {
+    public boolean buyCurrency(CurrencyName currencyName, BigDecimal requiredAmount) throws OperationException {
 
         try {
             while (!lock.tryLock()) {
@@ -69,14 +72,15 @@ public class ExchangeOperationProvider {
             }
             condition.signalAll();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            throw new OperationException(e.getMessage(), e);
         } finally {
             lock.unlock();
         }
         return false;
     }
 
-    public boolean sellCurrency(CurrencyName currencyName, BigDecimal requiredAmount) {
+    public boolean sellCurrency(CurrencyName currencyName, BigDecimal requiredAmount) throws OperationException {
         try {
             while (!lock.tryLock()) {
                 condition.await();
@@ -112,7 +116,8 @@ public class ExchangeOperationProvider {
             }
             condition.signalAll();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            throw new OperationException(e.getMessage(), e);
         } finally {
             lock.unlock();
         }

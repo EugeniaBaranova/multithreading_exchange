@@ -1,7 +1,7 @@
 package com.epam.multithreading.entity;
 
 import com.epam.multithreading.entity.currency.CurrencyName;
-import com.epam.multithreading.observer.commands.CommandProvider;
+import com.epam.multithreading.observer.commands.currentInfo.CommandProvider;
 import com.epam.multithreading.operations.ExchangeOperationProvider;
 
 import java.math.BigDecimal;

@@ -1,7 +1,8 @@
-package com.epam.multithreading.observer.commands;
+package com.epam.multithreading.observer.commands.rate;
 
 import com.epam.multithreading.entity.Exchange;
 import com.epam.multithreading.entity.currency.USDollar;
+import com.epam.multithreading.observer.commands.Command;
 
 import java.math.BigDecimal;
 

@@ -3,7 +3,7 @@ package com.epam.multithreading.observer;
 import com.epam.multithreading.entity.Exchange;
 import com.epam.multithreading.entity.ExchangeInfo;
 import com.epam.multithreading.entity.currency.CurrencyName;
-import com.epam.multithreading.observer.commands.CommandProvider;
+import com.epam.multithreading.observer.commands.currentInfo.CommandProvider;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
