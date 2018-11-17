@@ -13,5 +13,5 @@ import java.util.Map;
 
 public interface CommandProvider {
 
-    List<Command> getCommand(CurrencyName commandName);
+    Command getCommand(CurrencyName commandName);
 }
